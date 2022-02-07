@@ -57,7 +57,7 @@ const Login: NextPage = () => {
                     <Button isLoading={isLoadingSubmit} type='submit'>
                         <span>Login</span>
                     </Button>
-                    <Button onClick={handleRegister} isLoading={isLoadingSubmit} type='button'>
+                    <Button onClick={handleRegister} type='button'>
                         <span>Register</span>
                     </Button>
                 </SimpleGrid>

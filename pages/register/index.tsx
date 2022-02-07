@@ -1,9 +1,10 @@
 import {NextPage} from "next";
 import MiAuthBox from "../../component/AuthBox";
-import {Box, Button, Center, FormControl, FormLabel, Grid, Select} from "@chakra-ui/react";
+import {Box, Button, Center, Flex, FormControl, FormLabel, Grid, Select} from "@chakra-ui/react";
 import MiInput from "../../component/Input";
 import {ChangeEventHandler, FormEventHandler, useState} from "react";
 import {useRouter} from "next/router";
+import {ArrowBackIcon} from "@chakra-ui/icons";
 
 const Register: NextPage = () => {
     const router = useRouter()
@@ -15,6 +16,10 @@ const Register: NextPage = () => {
     })
 
     const [isLoadingSubmit, setIsLoadingSubmit] = useState(false)
+
+    const handleBack = () => {
+      router.push('/login')
+    }
 
     const handleSubmit: FormEventHandler<HTMLFormElement> = event => {
         event.preventDefault()
@@ -48,6 +53,11 @@ const Register: NextPage = () => {
 
     return (
         <MiAuthBox>
+            <Flex justifyContent={'flex-end'}>
+                <Button onClick={handleBack}>
+                    <ArrowBackIcon />
+                </Button>
+            </Flex>
             <form onSubmit={handleSubmit}>
                 <Grid templateRows='repeat(2,1fr)' gap='2' flexDirection='column'>
                     <MiInput onChange={handleChange} value={form.email} id='w-email' title='Email' type={"email"}/>
