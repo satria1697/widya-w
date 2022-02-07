@@ -1,6 +1,5 @@
 import {FormControl, FormLabel, Input} from "@chakra-ui/react";
 import {ChangeEventHandler, FunctionComponent, HTMLInputTypeAttribute} from "react";
-import {InputType} from "zlib";
 
 interface inputProps {
     id: string
