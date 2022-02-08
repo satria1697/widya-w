@@ -1,28 +1,34 @@
-import type {NextPage, NextPageContext} from 'next'
+import type {NextPage} from 'next'
 import {Button, Grid, SimpleGrid} from "@chakra-ui/react";
 import {ChangeEventHandler, FormEventHandler, useState} from "react";
 import MiInput from "../../component/Input";
 import {useRouter} from "next/router";
 import MiAuthBox from "../../component/AuthBox";
+import {login} from "../../repository/auth";
+import {LoginRequest} from "../../entities/request/auth";
 
 const Login: NextPage = () => {
     const router = useRouter()
-    const [form, setForm] = useState({
+    const [form, setForm] = useState<{email: string, password: string}>({
         email: '',
         password: ''
     })
 
     const [isLoadingSubmit, setIsLoadingSubmit] = useState(false)
 
-    const handleSubmit: FormEventHandler<HTMLFormElement> = event => {
+    const handleSubmit: FormEventHandler<HTMLFormElement> = async event => {
         event.preventDefault()
         setIsLoadingSubmit(true)
-        setTimeout(() => {
-            if (form.email === 'spanuu' && form.password === '123') {
-                router.push('/')
-            }
-            setIsLoadingSubmit(false)
-        }, 1000)
+
+        const payload: LoginRequest = {
+            email: form.email,
+            password: form.password
+        }
+        await login(payload)
+
+        router.push('/')
+
+        setIsLoadingSubmit(false)
     }
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {

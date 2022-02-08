@@ -1,35 +1,62 @@
 import {NextPage} from "next";
 import MiAuthBox from "../../component/AuthBox";
-import {Box, Button, Center, Flex, FormControl, FormLabel, Grid, Select} from "@chakra-ui/react";
+import {Button, Center, Flex, FormControl, FormLabel, Grid, Select, useToast} from "@chakra-ui/react";
 import MiInput from "../../component/Input";
 import {ChangeEventHandler, FormEventHandler, useState} from "react";
 import {useRouter} from "next/router";
 import {ArrowBackIcon} from "@chakra-ui/icons";
+import {register} from "../../repository/auth";
+import {RegisterRequest, TGender} from "../../entities/request/auth";
+
+interface iForm {
+    email: string
+    password: string
+    gender: TGender,
+    name: string
+}
 
 const Register: NextPage = () => {
     const router = useRouter()
+    const toast = useToast()
 
-    const [form, setForm] = useState({
+    const [form, setForm] = useState<iForm>({
         email: '',
         password: '',
-        gender: 'L'
+        gender: 'L',
+        name: '',
     })
 
     const [isLoadingSubmit, setIsLoadingSubmit] = useState(false)
 
     const handleBack = () => {
-      router.push('/login')
+        router.push('/login')
     }
 
-    const handleSubmit: FormEventHandler<HTMLFormElement> = event => {
+    const handleSubmit: FormEventHandler<HTMLFormElement> = async event => {
         event.preventDefault()
         setIsLoadingSubmit(true)
-        console.log(form)
-        setTimeout(() => {
-            router.push('/login')
-            setIsLoadingSubmit(false)
-        }, 1000)
+        const payload: RegisterRequest = {
+            email: form.email,
+            password: form.password,
+            gender: form.gender,
+            name: 'sen'
+        }
+        const res = await register(payload)
+        if (res) {
+            toast({
+                status: 'success',
+                title: "Berhasil Membuat Akun Baru"
+            })
+        } else {
+            toast({
+                status: 'error',
+                title: "Gagal Membuat Akun Baru"
+            })
+        }
+        router.push('/login')
+        setIsLoadingSubmit(false)
     }
+
     const handleChange: ChangeEventHandler<HTMLInputElement | HTMLSelectElement> = (event) => {
         const name = event.target.name
 
@@ -46,7 +73,12 @@ const Register: NextPage = () => {
         } else if (name === 'w-gender') {
             setForm((prev) => ({
                 ...prev,
-                gender: event.target.value
+                gender: event.target.value as TGender
+            }))
+        } else if (name === 'w-name') {
+            setForm((prev) => ({
+                ...prev,
+                name: event.target.value
             }))
         }
     }
@@ -55,11 +87,12 @@ const Register: NextPage = () => {
         <MiAuthBox>
             <Flex justifyContent={'flex-end'}>
                 <Button onClick={handleBack}>
-                    <ArrowBackIcon />
+                    <ArrowBackIcon/>
                 </Button>
             </Flex>
             <form onSubmit={handleSubmit}>
                 <Grid templateRows='repeat(2,1fr)' gap='2' flexDirection='column'>
+                    <MiInput onChange={handleChange} value={form.name} id='w-name' title='Name'/>
                     <MiInput onChange={handleChange} value={form.email} id='w-email' title='Email' type={"email"}/>
                     <MiInput onChange={handleChange} value={form.password} id='w-password' title='Password'
                              type='password'/>

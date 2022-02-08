@@ -29,6 +29,7 @@ import {Product} from "../entities/Product";
 import MiInput from "../component/Input";
 import {ProductEditRequest} from "../entities/request/product";
 import withAuth from "../HOC/withAuth";
+import {logout} from "../repository/auth";
 
 const Home: NextPage = () => {
     const router = useRouter()
@@ -61,7 +62,8 @@ const Home: NextPage = () => {
         init()
     }, [])
 
-    const handleClose = () => {
+    const handleClose =  async () => {
+        await logout()
         router.push('/login')
     }
 

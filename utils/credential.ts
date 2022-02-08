@@ -1,4 +1,4 @@
-import {isServer} from "./utils";
+const isServer = typeof window === 'undefined'
 
 export const getJwt = (): string | null => {
     if (!isServer) {
@@ -14,7 +14,14 @@ export const getJwt = (): string | null => {
 }
 
 export const setJwt = (jwt: string) => {
-    if (isServer) {
+    if (!isServer) {
         sessionStorage.setItem("jwt", jwt)
     }
 }
+
+export const removeJwt = () => {
+    if (!isServer) {
+        sessionStorage.removeItem('jwt')
+    }
+}
+

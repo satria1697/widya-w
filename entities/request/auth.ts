@@ -1,12 +1,12 @@
 export type TGender = 'L' | 'P';
 
 export interface LoginRequest {
-    email: ''
-    password: ''
+    email: string
+    password: string
 }
 
 export interface LogoutRequest {
-    jwt: ''
+    jwt: string
 }
 
 export interface RegisterRequest {
