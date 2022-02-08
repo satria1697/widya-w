@@ -28,6 +28,7 @@ import {ChangeEventHandler, FormEventHandler, useEffect, useState} from "react";
 import {Product} from "../entities/Product";
 import MiInput from "../component/Input";
 import {ProductEditRequest} from "../entities/request/product";
+import withAuth from "../HOC/withAuth";
 
 const Home: NextPage = () => {
     const router = useRouter()
@@ -237,4 +238,4 @@ const Home: NextPage = () => {
     )
 }
 
-export default Home
+export default withAuth(Home)
