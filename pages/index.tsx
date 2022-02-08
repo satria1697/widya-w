@@ -1,5 +1,19 @@
 import type {NextPage} from 'next'
-import {Box, Button, ButtonGroup, Flex, Grid, IconButton, Table, Tbody, Td, Th, Thead, Tr} from "@chakra-ui/react";
+import {
+    Box,
+    Button,
+    ButtonGroup, Center,
+    Flex,
+    Grid,
+    IconButton,
+    Spinner,
+    Table,
+    Tbody,
+    Td,
+    Th,
+    Thead,
+    Tr
+} from "@chakra-ui/react";
 import {PlusSquareIcon, LockIcon, CloseIcon, EditIcon} from "@chakra-ui/icons";
 import {useRouter} from "next/router";
 import {getAllProducts} from "../repository/product";
@@ -11,10 +25,12 @@ const Home: NextPage = () => {
 
     const [data, setData] = useState<Array<Product>>([])
 
+    const [isLoadingInit, setIsLoadingInit] = useState(true)
+
     useEffect(() => {
         getAllProducts().then(res => {
-            console.log(res)
             setData(res)
+            setIsLoadingInit(false)
         })
     }, [])
 
@@ -38,6 +54,10 @@ const Home: NextPage = () => {
                     <Button leftIcon={<PlusSquareIcon />}>
                         Tambah Barang</Button>
                 </Flex>
+                {isLoadingInit ?
+                <Center h={'full'}>
+                    <Spinner />
+                </Center> :
                 <Table>
                     <Thead>
                         <Tr>
@@ -83,6 +103,7 @@ const Home: NextPage = () => {
                         )}
                     </Tbody>
                 </Table>
+                }
             </Box>
         </Grid>
     )

@@ -1,4 +1,4 @@
-import type {NextPage} from 'next'
+import type {NextPage, NextPageContext} from 'next'
 import {Button, Grid, SimpleGrid} from "@chakra-ui/react";
 import {ChangeEventHandler, FormEventHandler, useState} from "react";
 import MiInput from "../../component/Input";

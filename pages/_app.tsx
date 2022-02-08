@@ -2,8 +2,9 @@ import {ChakraProvider, extendTheme, theme} from '@chakra-ui/react'
 import type {AppProps} from "next/app";
 import '../styles/globals.css'
 import {useRouter} from "next/router";
+import {FC} from "react";
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
     const router = useRouter()
 
     const theme= {
