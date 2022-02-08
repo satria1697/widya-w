@@ -1,6 +1,6 @@
-export interface Product {
+export interface ProductEditRequest {
     id?: number
     title?: string
-    price?: number
     description?: string
+    price?: number
 }

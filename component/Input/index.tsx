@@ -1,5 +1,5 @@
 import {FormControl, FormLabel, Input} from "@chakra-ui/react";
-import {ChangeEventHandler, FunctionComponent, HTMLInputTypeAttribute} from "react";
+import {ChangeEventHandler, FunctionComponent, HTMLInputTypeAttribute, useEffect} from "react";
 
 interface inputProps {
     id: string
@@ -14,10 +14,11 @@ const MiInput: FunctionComponent<inputProps> = (props) => {
     if (props.type) {
         type = props.type
     }
+
     return (
         <FormControl>
             <FormLabel htmlFor={props.id}>{props.title}</FormLabel>
-            <Input name={props.id} onChange={props.onChange} id={props.id} placeholder={props.title} type={type}/>
+            <Input name={props.id} value={props.value} onChange={props.onChange} id={props.id} placeholder={props.title} type={type}/>
         </FormControl>
     )
 }
