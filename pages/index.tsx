@@ -191,7 +191,10 @@ const Home: NextPage = () => {
                     {isLoadingInit ?
                         <Center h={'full'}>
                             <Spinner/>
-                        </Center> :
+                        </Center> : !data.length ?
+                            <Center>
+                                Tidak ada data
+                            </Center> :
                         <Table>
                             <Thead>
                                 <Tr>
