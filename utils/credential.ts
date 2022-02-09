@@ -2,7 +2,7 @@ const isServer = typeof window === 'undefined'
 
 export const getJwt = (): string | null => {
     if (!isServer) {
-        let jwt: string | null = ''
+        let jwt: string | null = null
         try {
             jwt = sessionStorage.getItem("jwt")
         } catch (e) {
