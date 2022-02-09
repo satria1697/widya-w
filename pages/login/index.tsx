@@ -6,6 +6,7 @@ import {useRouter} from "next/router";
 import MiAuthBox from "../../component/AuthBox";
 import {login} from "../../repository/auth";
 import {LoginRequest} from "../../entities/request/auth";
+import Head from "next/head";
 
 const Login: NextPage = () => {
     const router = useRouter()
@@ -53,6 +54,9 @@ const Login: NextPage = () => {
 
     return (
         <MiAuthBox>
+            <Head>
+                <title>Login</title>
+            </Head>
             <form onSubmit={handleSubmit}>
                 <Grid templateRows='repeat(2,1fr)' gap='2' flexDirection='column'>
                     <MiInput onChange={handleChange} value={form.email} id='w-username' title='Username'/>

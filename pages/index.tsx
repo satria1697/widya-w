@@ -175,7 +175,7 @@ const Home: NextPage = () => {
                 <Flex alignItems={'center'} px={'1rem'} h={'full'} justifyContent={'space-between'} borderBottom={'1px'}
                       borderColor={'gray.300'}>
                     <Box>
-                        <div onClick={() => {router.push('/profile')}}>Hello, User</div>
+                        <Box cursor={'pointer'} onClick={() => {router.push('/profile')}}>Hello, User</Box>
                     </Box>
                     <Box>
                         <IconButton type={'button'} onClick={handleClose} aria-label={'logout'}

@@ -7,6 +7,7 @@ import {useRouter} from "next/router";
 import {ArrowBackIcon} from "@chakra-ui/icons";
 import {register} from "../../repository/auth";
 import {RegisterRequest, TGender} from "../../entities/request/auth";
+import Head from "next/head";
 
 interface iForm {
     email: string
@@ -85,6 +86,9 @@ const Register: NextPage = () => {
 
     return (
         <MiAuthBox>
+            <Head>
+                <title>Register</title>
+            </Head>
             <Flex justifyContent={'flex-end'}>
                 <Button onClick={handleBack}>
                     <ArrowBackIcon/>

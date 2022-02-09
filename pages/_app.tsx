@@ -3,6 +3,7 @@ import type {AppProps} from "next/app";
 import '../styles/globals.css'
 import {useRouter} from "next/router";
 import {FC} from "react";
+import Head from "next/head";
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
     const router = useRouter()
@@ -20,9 +21,14 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
     const customTheme = extendTheme(theme)
 
   return (
-      <ChakraProvider theme={customTheme}>
-        <Component {...pageProps} />
-      </ChakraProvider>
+      <>
+          <Head>
+              <title>Product Dashboard</title>
+          </Head>
+          <ChakraProvider theme={customTheme}>
+              <Component {...pageProps} />
+          </ChakraProvider>
+      </>
   )
 }
 
